@@ -117,6 +117,24 @@
   .cta-section p { color: var(--text-muted); margin: 8px 0 0; max-width: 40ch; }
   .note { font-size: 0.82rem; color: var(--text-muted); margin-top: 14px; }
 
+  .idea-item {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .vote-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-width: 52px; padding: 6px 4px; border-radius: 8px;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--accent);
+    cursor: pointer; font-family: inherit; transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .vote-btn:hover:not(:disabled) { border-color: var(--accent); }
+  .vote-btn:disabled { color: #6FCF97; cursor: default; opacity: 0.85; }
+  .vote-arrow { font-size: 0.85rem; line-height: 1; }
+  .vote-count { font-size: 0.95rem; font-weight: 700; line-height: 1.4; }
+  .idea-text { font-size: 0.96rem; color: var(--text); }
+  #idea-input:focus { outline: none; border-color: var(--accent); }
+
   footer { padding: 32px 24px 44px; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
   @media (max-width: 760px) {
@@ -202,9 +220,15 @@
   <div class="block-inner">
     <h2>Punya kebutuhan reminder yang lain? Usul &amp; vote di sini</h2>
     <p style="color:var(--text-muted); max-width:52ch; margin:-20px 0 28px;">Request paling banyak di-vote yang bakal diprioritaskan dibangun duluan.</p>
-    <div style="border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface);">
-      <iframe src="https://qwery.frill.co/embed/widget/widget_2K1h2W_hjZGtG" sandbox="allow-same-origin allow-scripts allow-top-navigation allow-popups allow-forms allow-popups-to-escape-sandbox" style="width:100%; height:640px; display:block; border:none; outline:none;"></iframe>
-    </div>
+
+    <form id="idea-form" style="display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;">
+      <input id="idea-input" type="text" maxlength="280" placeholder="Tulis request kamu di sini..." required
+        style="flex:1; min-width:220px; padding:12px 14px; border-radius:9px; border:1px solid var(--line); background:var(--surface); color:var(--text); font-family:inherit; font-size:0.95rem;">
+      <button type="submit" class="btn-primary" style="border:none; cursor:pointer; font-family:inherit;">Kirim usul</button>
+    </form>
+
+    <div id="idea-empty" style="display:none; color:var(--text-muted); padding:32px; text-align:center; border:1px dashed var(--line); border-radius:12px;"></div>
+    <div id="idea-list" style="display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 </section>
 
@@ -222,6 +246,87 @@
 </section>
 
 <footer>Nagihin — masih ide, belum produk jadi. Dibuat buat validasi.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function() {
+  // GANTI dua nilai di bawah dengan Project URL & anon public key dari Supabase kamu
+  var SUPABASE_URL = 'https://xsdjdewpzbliualiwtdh.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzZGpkZXdwemJsaXVhbGl3dGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU5NDYsImV4cCI6MjEwNTczMTk0Nn0.XoH609DOhgk9qQ4ay5U4bfApvkyBHRNV3hcRlcPk1oQ';
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function getVoted() {
+    try { return JSON.parse(localStorage.getItem('nagihin_voted') || '[]'); } catch (e) { return []; }
+  }
+  function markVoted(id) {
+    try {
+      var v = getVoted();
+      v.push(id);
+      localStorage.setItem('nagihin_voted', JSON.stringify(v));
+    } catch (e) {}
+  }
+  function escapeHtml(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  async function loadIdeas() {
+    var listEl = document.getElementById('idea-list');
+    var emptyEl = document.getElementById('idea-empty');
+    var result = await sb.from('ideas').select('*').order('votes', { ascending: false }).order('created_at', { ascending: true });
+    if (result.error) {
+      listEl.innerHTML = '';
+      emptyEl.style.display = 'block';
+      emptyEl.textContent = 'Gagal memuat data. Coba refresh halaman.';
+      return;
+    }
+    var data = result.data || [];
+    if (data.length === 0) {
+      listEl.innerHTML = '';
+      emptyEl.style.display = 'block';
+      emptyEl.textContent = 'Belum ada request — jadi yang pertama kasih usul di atas! 👆';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    var voted = getVoted();
+    listEl.innerHTML = data.map(function(idea) {
+      var already = voted.indexOf(idea.id) !== -1;
+      return '<div class="idea-item">' +
+        '<button class="vote-btn" data-id="' + idea.id + '"' + (already ? ' disabled' : '') + '>' +
+          '<span class="vote-arrow">▲</span><span class="vote-count">' + idea.votes + '</span>' +
+        '</button>' +
+        '<span class="idea-text">' + escapeHtml(idea.text) + '</span>' +
+      '</div>';
+    }).join('');
+    document.querySelectorAll('.vote-btn').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        var id = btn.getAttribute('data-id');
+        if (getVoted().indexOf(id) !== -1) return;
+        btn.disabled = true;
+        await sb.rpc('increment_vote', { idea_id: id });
+        markVoted(id);
+        loadIdeas();
+      });
+    });
+  }
+
+  document.getElementById('idea-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var input = document.getElementById('idea-input');
+    var text = input.value.trim();
+    if (!text) return;
+    var btn = e.target.querySelector('button[type=submit]');
+    btn.disabled = true;
+    await sb.from('ideas').insert({ text: text });
+    input.value = '';
+    btn.disabled = false;
+    loadIdeas();
+  });
+
+  loadIdeas();
+})();
+</script>
 
 </body>
 </html>
