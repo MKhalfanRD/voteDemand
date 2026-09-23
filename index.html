@@ -1,332 +1,635 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nagihin — Biar yang nagih bukan kamu</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #10131C;
-    --surface: #1B2030;
-    --surface-2: #232941;
-    --line: #333C58;
-    --text: #F3F1EA;
-    --text-muted: #9BA3C2;
-    --accent: #E3A857;
-    --accent-deep: #B9812A;
-    --font-display: 'Fraunces', serif;
-    --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ink: #10131C; --surface: #1B2030; --text: #F3F1EA;
-    }
-  }
-  :root[data-theme="dark"] { --ink: #10131C; --surface: #1B2030; --text: #F3F1EA; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Nagihin — Biar yang nagih bukan kamu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #10131c;
+        --surface: #1b2030;
+        --surface-2: #232941;
+        --line: #333c58;
+        --text: #f3f1ea;
+        --text-muted: #9ba3c2;
+        --accent: #e3a857;
+        --accent-deep: #b9812a;
+        --font-display: "Fraunces", serif;
+        --font-body: "Public Sans", system-ui, -apple-system, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --ink: #10131c;
+          --surface: #1b2030;
+          --text: #f3f1ea;
+        }
+      }
+      :root[data-theme="dark"] {
+        --ink: #10131c;
+        --surface: #1b2030;
+        --text: #f3f1ea;
+      }
 
-  * { box-sizing: border-box; }
-  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-  body {
-    margin: 0;
-    background: var(--ink);
-    color: var(--text);
-    font-family: var(--font-body);
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    line-height: 1.55;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  header {
-    position: sticky; top: 0; top: env(safe-area-inset-top, 0px);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 24px; background: rgba(16,19,28,0.85); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line); z-index: 10;
-  }
-  .logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; }
-  .logo span { color: var(--accent); }
-  .nav-cta {
-    background: var(--accent); color: #1a1200; text-decoration: none;
-    padding: 9px 18px; border-radius: 8px; font-weight: 600; font-size: 0.92rem;
-    transition: background 0.15s ease;
-  }
-  .nav-cta:hover { background: #f0b866; }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: var(--text);
+        font-family: var(--font-body);
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        line-height: 1.55;
+      }
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        top: env(safe-area-inset-top, 0px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px;
+        background: rgba(16, 19, 28, 0.85);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+        z-index: 10;
+      }
+      .logo {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .logo span {
+        color: var(--accent);
+      }
+      .nav-cta {
+        background: var(--accent);
+        color: #1a1200;
+        text-decoration: none;
+        padding: 9px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        transition: background 0.15s ease;
+      }
+      .nav-cta:hover {
+        background: #f0b866;
+      }
 
-  .hero {
-    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px;
-    align-items: center; padding: 88px 24px 72px; max-width: 1080px; margin: 0 auto;
-  }
-  .eyebrow { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin: 0 0 14px; }
-  h1 {
-    font-family: var(--font-display); font-size: clamp(2.3rem, 4.4vw, 3.6rem);
-    line-height: 1.08; margin: 0 0 22px; font-weight: 600; max-width: 13ch;
-  }
-  .hero p.lead {
-    font-size: 1.15rem; color: var(--text-muted); max-width: 46ch; margin: 0 0 32px;
-  }
-  .cta-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--accent); color: #1a1200; text-decoration: none;
-    padding: 14px 26px; border-radius: 9px; font-weight: 700; font-size: 1.02rem;
-    display: inline-block; transition: background 0.15s ease, transform 0.1s ease;
-  }
-  .btn-primary:hover { background: #f0b866; transform: translateY(-1px); }
-  .counter { font-size: 0.92rem; color: var(--text-muted); }
-  .counter strong { color: var(--text); font-weight: 700; }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 56px;
+        align-items: center;
+        padding: 88px 24px 72px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin: 0 0 14px;
+      }
+      h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+        line-height: 1.08;
+        margin: 0 0 22px;
+        font-weight: 600;
+        max-width: 13ch;
+      }
+      .hero p.lead {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        max-width: 46ch;
+        margin: 0 0 32px;
+      }
+      .cta-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #1a1200;
+        text-decoration: none;
+        padding: 14px 26px;
+        border-radius: 9px;
+        font-weight: 700;
+        font-size: 1.02rem;
+        display: inline-block;
+        transition:
+          background 0.15s ease,
+          transform 0.1s ease;
+      }
+      .btn-primary:hover {
+        background: #f0b866;
+        transform: translateY(-1px);
+      }
+      .counter {
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .counter strong {
+        color: var(--text);
+        font-weight: 700;
+      }
 
-  .mock {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-    padding: 22px; display: flex; flex-direction: column; gap: 12px;
-  }
-  .mock-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
-  .chip {
-    background: var(--surface-2); border-radius: 10px; padding: 12px 14px;
-    font-size: 0.88rem; border-left: 3px solid var(--accent);
-  }
-  .chip.sent { border-left-color: #6FCF97; }
-  .chip .tag { font-size: 0.72rem; color: var(--accent); font-weight: 700; display: block; margin-bottom: 3px; }
-  .chip.sent .tag { color: #6FCF97; }
+      .mock {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .mock-label {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+      .chip {
+        background: var(--surface-2);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 0.88rem;
+        border-left: 3px solid var(--accent);
+      }
+      .chip.sent {
+        border-left-color: #6fcf97;
+      }
+      .chip .tag {
+        font-size: 0.72rem;
+        color: var(--accent);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 3px;
+      }
+      .chip.sent .tag {
+        color: #6fcf97;
+      }
 
-  section.block { padding: 64px 24px; border-top: 1px solid var(--line); }
-  .block-inner { max-width: 1080px; margin: 0 auto; }
-  h2 {
-    font-family: var(--font-display); font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-    font-weight: 600; margin: 0 0 40px; max-width: 20ch;
-  }
-  .problems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .problem h3 { font-size: 1.05rem; margin: 0 0 8px; }
-  .problem p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+      section.block {
+        padding: 64px 24px;
+        border-top: 1px solid var(--line);
+      }
+      .block-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+        font-weight: 600;
+        margin: 0 0 40px;
+        max-width: 20ch;
+      }
+      .problems {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .problem h3 {
+        font-size: 1.05rem;
+        margin: 0 0 8px;
+      }
+      .problem p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin: 0;
+      }
 
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .step-num {
-    font-family: var(--font-display); font-size: 1.8rem; color: var(--accent);
-    margin: 0 0 10px; font-weight: 600;
-  }
-  .step h3 { font-size: 1.05rem; margin: 0 0 8px; }
-  .step p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+      .step-num {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        color: var(--accent);
+        margin: 0 0 10px;
+        font-weight: 600;
+      }
+      .step h3 {
+        font-size: 1.05rem;
+        margin: 0 0 8px;
+      }
+      .step p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin: 0;
+      }
 
-  .cta-section { text-align: left; }
-  .cta-section .box {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
-    padding: 44px; display: flex; align-items: center; justify-content: space-between;
-    gap: 32px; flex-wrap: wrap;
-  }
-  .cta-section h2 { margin: 0; max-width: 24ch; }
-  .cta-section p { color: var(--text-muted); margin: 8px 0 0; max-width: 40ch; }
-  .note { font-size: 0.82rem; color: var(--text-muted); margin-top: 14px; }
+      .cta-section {
+        text-align: left;
+      }
+      .cta-section .box {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        flex-wrap: wrap;
+      }
+      .cta-section h2 {
+        margin: 0;
+        max-width: 24ch;
+      }
+      .cta-section p {
+        color: var(--text-muted);
+        margin: 8px 0 0;
+        max-width: 40ch;
+      }
+      .note {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        margin-top: 14px;
+      }
 
-  .idea-item {
-    display: flex; align-items: center; gap: 16px;
-    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
-    padding: 14px 18px;
-  }
-  .vote-btn {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    min-width: 52px; padding: 6px 4px; border-radius: 8px;
-    background: var(--surface-2); border: 1px solid var(--line); color: var(--accent);
-    cursor: pointer; font-family: inherit; transition: background 0.15s ease, border-color 0.15s ease;
-  }
-  .vote-btn:hover:not(:disabled) { border-color: var(--accent); }
-  .vote-btn:disabled { color: #6FCF97; cursor: default; opacity: 0.85; }
-  .vote-arrow { font-size: 0.85rem; line-height: 1; }
-  .vote-count { font-size: 0.95rem; font-weight: 700; line-height: 1.4; }
-  .idea-text { font-size: 0.96rem; color: var(--text); }
-  #idea-input:focus { outline: none; border-color: var(--accent); }
+      .idea-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px 18px;
+      }
+      .vote-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 52px;
+        padding: 6px 4px;
+        border-radius: 8px;
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        color: var(--accent);
+        cursor: pointer;
+        font-family: inherit;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .vote-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+      }
+      .vote-btn:disabled {
+        color: #6fcf97;
+        cursor: default;
+        opacity: 0.85;
+      }
+      .vote-arrow {
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+      .vote-count {
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      .idea-text {
+        font-size: 0.96rem;
+        color: var(--text);
+      }
+      #idea-input:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
 
-  footer { padding: 32px 24px 44px; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+      footer {
+        padding: 32px 24px 44px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
 
-  @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; padding-top: 56px; }
-    .problems, .steps { grid-template-columns: 1fr; }
-    .cta-section .box { flex-direction: column; align-items: flex-start; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 760px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 56px;
+        }
+        .problems,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .cta-section .box {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Nagih<span>in</span></div>
+      <a class="nav-cta" href="#frill-widget">Gabung waitlist</a>
+    </header>
 
-<header>
-  <div class="logo">Nagih<span>in</span></div>
-  <a class="nav-cta" href="#frill-widget" >Gabung waitlist</a>
-</header>
-
-<div class="hero">
-  <div>
-    <p class="eyebrow">Untuk freelancer &amp; agency kecil</p>
-    <h1>Biar yang nagih bukan kamu.</h1>
-    <p class="lead">Nagihin ngirim pengingat pembayaran yang sopan dan profesional ke klien yang telat bayar — otomatis lewat WhatsApp &amp; email, tanpa kamu harus jadi orang yang "nagih-nagih" terus.</p>
-    <div class="cta-row">
-      <a class="btn-primary" href="#frill-widget" >Saya mau coba →</a>
-    </div>
-  </div>
-  <div class="mock">
-    <p class="mock-label">Contoh pesan otomatis</p>
-    <div class="chip">
-      <span class="tag">H+3 JATUH TEMPO</span>
-      Halo Pak Rian, invoice #0231 (Rp3.500.000) sudah lewat 3 hari dari jatuh tempo. Boleh dicek ya, terima kasih 🙏
-    </div>
-    <div class="chip sent">
-      <span class="tag">TERKIRIM OTOMATIS</span>
-      Dikirim via WhatsApp, Selasa 09:00 — tanpa kamu perlu ketik apa-apa.
-    </div>
-  </div>
-</div>
-
-<section class="block">
-  <div class="block-inner">
-    <h2>Nagih itu bukan kerjaan yang kamu pengen lakuin tiap bulan.</h2>
-    <div class="problems">
-      <div class="problem">
-        <h3>Nggak enak nagih</h3>
-        <p>Klien udah kenal baik, jadi ragu buat ngirim chat "kak, invoicenya gimana ya".</p>
-      </div>
-      <div class="problem">
-        <h3>Buang waktu</h3>
-        <p>Harus cek satu-satu invoice mana yang telat, lalu bikin pesan follow-up manual tiap kali.</p>
-      </div>
-      <div class="problem">
-        <h3>Cash flow keganggu</h3>
-        <p>Kerjaan udah kelar dari minggu lalu, tapi uangnya masih nyangkut di klien.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="block-inner">
-    <h2>Cara kerjanya</h2>
-    <div class="steps">
-      <div class="step">
-        <p class="step-num">1</p>
-        <h3>Catat invoice</h3>
-        <p>Masukkan invoice, nominal, dan tanggal jatuh tempo — sekali input, selesai.</p>
-      </div>
-      <div class="step">
-        <p class="step-num">2</p>
-        <h3>Atur jadwal</h3>
-        <p>Pilih kapan pengingat dikirim: sebelum jatuh tempo, hari H, atau kalau telat.</p>
-      </div>
-      <div class="step">
-        <p class="step-num">3</p>
-        <h3>Nagihin yang kirim</h3>
-        <p>Pesan sopan dan profesional otomatis terkirim ke WhatsApp atau email klien.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="frill-widget">
-  <div class="block-inner">
-    <h2>Punya kebutuhan reminder yang lain? Usul &amp; vote di sini</h2>
-    <p style="color:var(--text-muted); max-width:52ch; margin:-20px 0 28px;">Request paling banyak di-vote yang bakal diprioritaskan dibangun duluan.</p>
-
-    <form id="idea-form" style="display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;">
-      <input id="idea-input" type="text" maxlength="280" placeholder="Tulis request kamu di sini..." required
-        style="flex:1; min-width:220px; padding:12px 14px; border-radius:9px; border:1px solid var(--line); background:var(--surface); color:var(--text); font-family:inherit; font-size:0.95rem;">
-      <button type="submit" class="btn-primary" style="border:none; cursor:pointer; font-family:inherit;">Kirim usul</button>
-    </form>
-
-    <div id="idea-empty" style="display:none; color:var(--text-muted); padding:32px; text-align:center; border:1px dashed var(--line); border-radius:12px;"></div>
-    <div id="idea-list" style="display:flex; flex-direction:column; gap:10px;"></div>
-  </div>
-</section>
-
-<section class="block cta-section">
-  <div class="block-inner">
-    <div class="box">
+    <div class="hero">
       <div>
-        <h2>Masih tahap validasi.</h2>
-        <p>Kalau kamu sering ngalamin klien telat bayar, kabarin lewat email — 100 pendaftar pertama gratis pas Nagihin jadi.</p>
+        <!-- <p class="eyebrow">Untuk freelancer &amp; agency kecil</p> -->
+        <h1>Biar yang nagih bukan kamu.</h1>
+        <p class="lead">
+          Nagihin ngirim pengingat pembayaran yang sopan dan profesional ke
+          klien yang telat bayar — otomatis lewat WhatsApp &amp; email, tanpa
+          kamu harus jadi orang yang "nagih-nagih" terus.
+        </p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#frill-widget">Saya mau coba →</a>
+        </div>
       </div>
-      <a class="btn-primary" href="#frill-widget" >Kabari saya duluan →</a>
+      <div class="mock">
+        <p class="mock-label">Contoh pesan otomatis</p>
+        <div class="chip">
+          <span class="tag">H+3 JATUH TEMPO</span>
+          Halo Pak Rian, invoice #0231 (Rp3.500.000) sudah lewat 3 hari dari
+          jatuh tempo. Boleh dicek ya, terima kasih 🙏
+        </div>
+        <div class="chip sent">
+          <span class="tag">TERKIRIM OTOMATIS</span>
+          Dikirim via WhatsApp, Selasa 09:00 — tanpa kamu perlu ketik apa-apa.
+        </div>
+      </div>
     </div>
-    <p class="note">Halaman ini cuma buat ngetes minat sebelum Nagihin benar-benar dibangun.</p>
-  </div>
-</section>
 
-<footer>Nagihin — masih ide, belum produk jadi. Dibuat buat validasi.</footer>
+    <section class="block">
+      <div class="block-inner">
+        <h2>Nagih itu bukan kerjaan yang kamu pengen lakuin tiap bulan.</h2>
+        <div class="problems">
+          <div class="problem">
+            <h3>Nggak enak nagih</h3>
+            <p>
+              Klien udah kenal baik, jadi ragu buat ngirim chat "kak, invoicenya
+              gimana ya".
+            </p>
+          </div>
+          <div class="problem">
+            <h3>Buang waktu</h3>
+            <p>
+              Harus cek satu-satu invoice mana yang telat, lalu bikin pesan
+              follow-up manual tiap kali.
+            </p>
+          </div>
+          <div class="problem">
+            <h3>Cash flow keganggu</h3>
+            <p>
+              Kerjaan udah kelar dari minggu lalu, tapi uangnya masih nyangkut
+              di klien.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(function() {
-  // GANTI dua nilai di bawah dengan Project URL & anon public key dari Supabase kamu
-  var SUPABASE_URL = 'https://xsdjdewpzbliualiwtdh.supabase.co';
-  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzZGpkZXdwemJsaXVhbGl3dGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU5NDYsImV4cCI6MjEwNTczMTk0Nn0.XoH609DOhgk9qQ4ay5U4bfApvkyBHRNV3hcRlcPk1oQ';
-  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <section class="block">
+      <div class="block-inner">
+        <h2>Cara kerjanya</h2>
+        <div class="steps">
+          <div class="step">
+            <p class="step-num">1</p>
+            <h3>Catat invoice</h3>
+            <p>
+              Masukkan invoice, nominal, dan tanggal jatuh tempo — sekali input,
+              selesai.
+            </p>
+          </div>
+          <div class="step">
+            <p class="step-num">2</p>
+            <h3>Atur jadwal</h3>
+            <p>
+              Pilih kapan pengingat dikirim: sebelum jatuh tempo, hari H, atau
+              kalau telat.
+            </p>
+          </div>
+          <div class="step">
+            <p class="step-num">3</p>
+            <h3>Nagihin yang kirim</h3>
+            <p>
+              Pesan sopan dan profesional otomatis terkirim ke WhatsApp atau
+              email klien.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  function getVoted() {
-    try { return JSON.parse(localStorage.getItem('nagihin_voted') || '[]'); } catch (e) { return []; }
-  }
-  function markVoted(id) {
-    try {
-      var v = getVoted();
-      v.push(id);
-      localStorage.setItem('nagihin_voted', JSON.stringify(v));
-    } catch (e) {}
-  }
-  function escapeHtml(str) {
-    var d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
+    <section class="block" id="frill-widget">
+      <div class="block-inner">
+        <h2>Punya kebutuhan reminder yang lain? Usul &amp; vote di sini</h2>
+        <p
+          style="
+            color: var(--text-muted);
+            max-width: 52ch;
+            margin: -20px 0 28px;
+          "
+        >
+          Request paling banyak di-vote yang bakal diprioritaskan dibangun
+          duluan.
+        </p>
 
-  async function loadIdeas() {
-    var listEl = document.getElementById('idea-list');
-    var emptyEl = document.getElementById('idea-empty');
-    var result = await sb.from('ideas').select('*').order('votes', { ascending: false }).order('created_at', { ascending: true });
-    if (result.error) {
-      listEl.innerHTML = '';
-      emptyEl.style.display = 'block';
-      emptyEl.textContent = 'Gagal memuat data. Coba refresh halaman.';
-      return;
-    }
-    var data = result.data || [];
-    if (data.length === 0) {
-      listEl.innerHTML = '';
-      emptyEl.style.display = 'block';
-      emptyEl.textContent = 'Belum ada request — jadi yang pertama kasih usul di atas! 👆';
-      return;
-    }
-    emptyEl.style.display = 'none';
-    var voted = getVoted();
-    listEl.innerHTML = data.map(function(idea) {
-      var already = voted.indexOf(idea.id) !== -1;
-      return '<div class="idea-item">' +
-        '<button class="vote-btn" data-id="' + idea.id + '"' + (already ? ' disabled' : '') + '>' +
-          '<span class="vote-arrow">▲</span><span class="vote-count">' + idea.votes + '</span>' +
-        '</button>' +
-        '<span class="idea-text">' + escapeHtml(idea.text) + '</span>' +
-      '</div>';
-    }).join('');
-    document.querySelectorAll('.vote-btn').forEach(function(btn) {
-      btn.addEventListener('click', async function() {
-        var id = btn.getAttribute('data-id');
-        if (getVoted().indexOf(id) !== -1) return;
-        btn.disabled = true;
-        await sb.rpc('increment_vote', { idea_id: id });
-        markVoted(id);
+        <form
+          id="idea-form"
+          style="display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap"
+        >
+          <input
+            id="idea-input"
+            type="text"
+            maxlength="280"
+            placeholder="Tulis request kamu di sini..."
+            required
+            style="
+              flex: 1;
+              min-width: 220px;
+              padding: 12px 14px;
+              border-radius: 9px;
+              border: 1px solid var(--line);
+              background: var(--surface);
+              color: var(--text);
+              font-family: inherit;
+              font-size: 0.95rem;
+            "
+          />
+          <button
+            type="submit"
+            class="btn-primary"
+            style="border: none; cursor: pointer; font-family: inherit"
+          >
+            Kirim usul
+          </button>
+        </form>
+
+        <div
+          id="idea-empty"
+          style="
+            display: none;
+            color: var(--text-muted);
+            padding: 32px;
+            text-align: center;
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+          "
+        ></div>
+        <div
+          id="idea-list"
+          style="display: flex; flex-direction: column; gap: 10px"
+        ></div>
+      </div>
+    </section>
+
+    <section class="block cta-section">
+      <div class="block-inner">
+        <div class="box">
+          <div>
+            <h2>Masih tahap validasi.</h2>
+            <p>
+              Kalau kamu sering ngalamin klien telat bayar, kabarin lewat email
+              — 100 pendaftar pertama gratis pas Nagihin jadi.
+            </p>
+          </div>
+          <a class="btn-primary" href="#frill-widget">Kabari saya duluan →</a>
+        </div>
+        <p class="note">
+          Halaman ini cuma buat ngetes minat sebelum Nagihin benar-benar
+          dibangun.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      Nagihin — masih ide, belum produk jadi. Dibuat buat validasi.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      (function () {
+        // GANTI dua nilai di bawah dengan Project URL & anon public key dari Supabase kamu
+        var SUPABASE_URL = "https://xsdjdewpzbliualiwtdh.supabase.co";
+        var SUPABASE_ANON_KEY =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzZGpkZXdwemJsaXVhbGl3dGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNTU5NDYsImV4cCI6MjEwNTczMTk0Nn0.XoH609DOhgk9qQ4ay5U4bfApvkyBHRNV3hcRlcPk1oQ";
+        var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        function getVoted() {
+          try {
+            return JSON.parse(localStorage.getItem("nagihin_voted") || "[]");
+          } catch (e) {
+            return [];
+          }
+        }
+        function markVoted(id) {
+          try {
+            var v = getVoted();
+            v.push(id);
+            localStorage.setItem("nagihin_voted", JSON.stringify(v));
+          } catch (e) {}
+        }
+        function escapeHtml(str) {
+          var d = document.createElement("div");
+          d.textContent = str;
+          return d.innerHTML;
+        }
+
+        async function loadIdeas() {
+          var listEl = document.getElementById("idea-list");
+          var emptyEl = document.getElementById("idea-empty");
+          var result = await sb
+            .from("ideas")
+            .select("*")
+            .order("votes", { ascending: false })
+            .order("created_at", { ascending: true });
+          if (result.error) {
+            listEl.innerHTML = "";
+            emptyEl.style.display = "block";
+            emptyEl.textContent = "Gagal memuat data. Coba refresh halaman.";
+            return;
+          }
+          var data = result.data || [];
+          if (data.length === 0) {
+            listEl.innerHTML = "";
+            emptyEl.style.display = "block";
+            emptyEl.textContent =
+              "Belum ada request — jadi yang pertama kasih usul di atas! 👆";
+            return;
+          }
+          emptyEl.style.display = "none";
+          var voted = getVoted();
+          listEl.innerHTML = data
+            .map(function (idea) {
+              var already = voted.indexOf(idea.id) !== -1;
+              return (
+                '<div class="idea-item">' +
+                '<button class="vote-btn" data-id="' +
+                idea.id +
+                '"' +
+                (already ? " disabled" : "") +
+                ">" +
+                '<span class="vote-arrow">▲</span><span class="vote-count">' +
+                idea.votes +
+                "</span>" +
+                "</button>" +
+                '<span class="idea-text">' +
+                escapeHtml(idea.text) +
+                "</span>" +
+                "</div>"
+              );
+            })
+            .join("");
+          document.querySelectorAll(".vote-btn").forEach(function (btn) {
+            btn.addEventListener("click", async function () {
+              var id = btn.getAttribute("data-id");
+              if (getVoted().indexOf(id) !== -1) return;
+              btn.disabled = true;
+              await sb.rpc("increment_vote", { idea_id: id });
+              markVoted(id);
+              loadIdeas();
+            });
+          });
+        }
+
+        document
+          .getElementById("idea-form")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            var input = document.getElementById("idea-input");
+            var text = input.value.trim();
+            if (!text) return;
+            var btn = e.target.querySelector("button[type=submit]");
+            btn.disabled = true;
+            await sb.from("ideas").insert({ text: text });
+            input.value = "";
+            btn.disabled = false;
+            loadIdeas();
+          });
+
         loadIdeas();
-      });
-    });
-  }
-
-  document.getElementById('idea-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var input = document.getElementById('idea-input');
-    var text = input.value.trim();
-    if (!text) return;
-    var btn = e.target.querySelector('button[type=submit]');
-    btn.disabled = true;
-    await sb.from('ideas').insert({ text: text });
-    input.value = '';
-    btn.disabled = false;
-    loadIdeas();
-  });
-
-  loadIdeas();
-})();
-</script>
-
-</body>
+      })();
+    </script>
+  </body>
 </html>
