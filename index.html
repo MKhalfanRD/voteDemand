@@ -202,7 +202,7 @@
   <div class="block-inner">
     <h2>Punya kebutuhan reminder yang lain? Usul &amp; vote di sini</h2>
     <p style="color:var(--text-muted); max-width:52ch; margin:-20px 0 28px;">Request paling banyak di-vote yang bakal diprioritaskan dibangun duluan.</p>
-    <div id="frill-widget" data-frill-widget="widget_2K1h2W_hjZGtG" data-frill-sso-token=""></div>
+    <button id="frill-widget" data-frill-widget="widget_2K1h2W_hjZGtG" class="btn-primary" style="border:none; cursor:pointer; font-family:inherit;">Ajukan atau vote ide →</button>
   </div>
 </section>
 
@@ -225,7 +225,7 @@
 <script>(function(e,t,r){var n=e.frill=e.frill||[];n.q=[];n.later=function(t,r){n.q.push([t,r])};n.methods="init identify shutdown open close on off".split(" ");for(var i=0;i<n.methods.length;i++){var o=n.methods[i];n[o]=function(e){return function(){var t=Array.prototype.slice.call(arguments);n.later(e,t)}}(o)}var d=t.createElement("script");d.type="text/javascript";d.async=!0;d.src="https://widget.frill.co/v2/widget.js";var s=t.getElementsByTagName("script")[0];s.parentNode.insertBefore(d,s)})(window,document);
 function openFrillWidget(e) {
   e.preventDefault();
-  document.getElementById('frill-widget').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('frill-widget').click();
 }
 </script>
 
