@@ -202,7 +202,7 @@
   <div class="block-inner">
     <h2>Punya kebutuhan reminder yang lain? Usul &amp; vote di sini</h2>
     <p style="color:var(--text-muted); max-width:52ch; margin:-20px 0 28px;">Request paling banyak di-vote yang bakal diprioritaskan dibangun duluan.</p>
-    <button id="frill-widget" data-frill-widget="widget_2K1h2W_hjZGtG" class="btn-primary" style="border:none; cursor:pointer; font-family:inherit;">Ajukan atau vote ide →</button>
+    <button id="frill-widget" onclick="openFrillWidget(event)" class="btn-primary" style="border:none; cursor:pointer; font-family:inherit;">Ajukan atau vote ide →</button>
   </div>
 </section>
 
@@ -221,13 +221,22 @@
 
 <footer>Nagihin — masih ide, belum produk jadi. Dibuat buat validasi.</footer>
 
-<!-- Frill widget script - wajib ada supaya widget di atas muncul -->
-<script>(function(e,t,r){var n=e.frill=e.frill||[];n.q=[];n.later=function(t,r){n.q.push([t,r])};n.methods="init identify shutdown open close on off".split(" ");for(var i=0;i<n.methods.length;i++){var o=n.methods[i];n[o]=function(e){return function(){var t=Array.prototype.slice.call(arguments);n.later(e,t)}}(o)}var d=t.createElement("script");d.type="text/javascript";d.async=!0;d.src="https://widget.frill.co/v2/widget.js";var s=t.getElementsByTagName("script")[0];s.parentNode.insertBefore(d,s)})(window,document);
-function openFrillWidget(e) {
-  e.preventDefault();
-  document.getElementById('frill-widget').click();
+<!-- Frill Script (versi baru 2026) -->
+<script>
+(function(t,r){function s(){var a=r.getElementsByTagName("script")[0],e=r.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://widget.frill.co/v2/container.js",a.parentNode.insertBefore(e,a)}if(!t.Frill){var o=0,i={};t.Frill=function(e,p){var n,l=o++,c=new Promise(function(v,d){i[l]={params:[e,p],resolve:function(f){n=f,v(f)},reject:d}});return c.destroy=function(){delete i[l],n&&n.destroy()},c},t.Frill.q=i;}r.readyState==="complete"||r.readyState==="interactive"?s():r.addEventListener("DOMContentLoaded",s)})(window,document);
+
+window.Frill('container', { key: 'container_Z9OC1R_Cxpn0u', autoLoad: false });
+
+var frillWidgetInstance = null;
+async function openFrillWidget(e) {
+  if (e) e.preventDefault();
+  if (!frillWidgetInstance) {
+    frillWidgetInstance = await window.Frill('widget', { key: 'widget_2K1h2W_hjZGtG' });
+  }
+  frillWidgetInstance.open();
 }
 </script>
+</body>
 
 </body>
 </html>
