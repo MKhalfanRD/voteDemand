@@ -130,7 +130,7 @@
 
 <header>
   <div class="logo">Nagih<span>in</span></div>
-  <a class="nav-cta" href="#frill-widget" onclick="openFrillWidget(event)">Gabung waitlist</a>
+  <a class="nav-cta" href="#frill-widget" >Gabung waitlist</a>
 </header>
 
 <div class="hero">
@@ -139,7 +139,7 @@
     <h1>Biar yang nagih bukan kamu.</h1>
     <p class="lead">Nagihin ngirim pengingat pembayaran yang sopan dan profesional ke klien yang telat bayar — otomatis lewat WhatsApp &amp; email, tanpa kamu harus jadi orang yang "nagih-nagih" terus.</p>
     <div class="cta-row">
-      <a class="btn-primary" href="#frill-widget" onclick="openFrillWidget(event)">Saya mau coba →</a>
+      <a class="btn-primary" href="#frill-widget" >Saya mau coba →</a>
     </div>
   </div>
   <div class="mock">
@@ -198,11 +198,13 @@
   </div>
 </section>
 
-<section class="block">
+<section class="block" id="frill-widget">
   <div class="block-inner">
     <h2>Punya kebutuhan reminder yang lain? Usul &amp; vote di sini</h2>
     <p style="color:var(--text-muted); max-width:52ch; margin:-20px 0 28px;">Request paling banyak di-vote yang bakal diprioritaskan dibangun duluan.</p>
-    <button id="frill-widget" onclick="openFrillWidget(event)" class="btn-primary" style="border:none; cursor:pointer; font-family:inherit;">Ajukan atau vote ide →</button>
+    <div style="border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface);">
+      <iframe src="https://widget.frill.co/embed/widget/widget_2K1h2W_hjZGtG" frameborder="0" allowfullscreen style="width:100%; height:640px; display:block; border:none;"></iframe>
+    </div>
   </div>
 </section>
 
@@ -213,30 +215,13 @@
         <h2>Masih tahap validasi.</h2>
         <p>Kalau kamu sering ngalamin klien telat bayar, kabarin lewat email — 100 pendaftar pertama gratis pas Nagihin jadi.</p>
       </div>
-      <a class="btn-primary" href="#frill-widget" onclick="openFrillWidget(event)">Kabari saya duluan →</a>
+      <a class="btn-primary" href="#frill-widget" >Kabari saya duluan →</a>
     </div>
     <p class="note">Halaman ini cuma buat ngetes minat sebelum Nagihin benar-benar dibangun.</p>
   </div>
 </section>
 
 <footer>Nagihin — masih ide, belum produk jadi. Dibuat buat validasi.</footer>
-
-<!-- Frill Script (versi baru 2026) -->
-<script>
-(function(t,r){function s(){var a=r.getElementsByTagName("script")[0],e=r.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://widget.frill.co/v2/container.js",a.parentNode.insertBefore(e,a)}if(!t.Frill){var o=0,i={};t.Frill=function(e,p){var n,l=o++,c=new Promise(function(v,d){i[l]={params:[e,p],resolve:function(f){n=f,v(f)},reject:d}});return c.destroy=function(){delete i[l],n&&n.destroy()},c},t.Frill.q=i;}r.readyState==="complete"||r.readyState==="interactive"?s():r.addEventListener("DOMContentLoaded",s)})(window,document);
-
-window.Frill('container', { key: 'container_Z9OC1R_Cxpn0u', autoLoad: false });
-
-var frillWidgetInstance = null;
-async function openFrillWidget(e) {
-  if (e) e.preventDefault();
-  if (!frillWidgetInstance) {
-    frillWidgetInstance = await window.Frill('widget', { key: 'widget_2K1h2W_hjZGtG' });
-  }
-  frillWidgetInstance.open();
-}
-</script>
-</body>
 
 </body>
 </html>
